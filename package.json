@@ -1,0 +1,8 @@
+{
+  "name": "norma-cs-training",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Fictional training sample for Norma Customer Success Enablement. Do not deploy.",
+  "type": "module",
+  "main": "frontend/dashboard.js"
+}
