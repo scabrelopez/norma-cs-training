@@ -10,8 +10,18 @@ export function renderScanCount(count) {
 }
 
 export async function loadScans(customer) {
-  const response = await fetch("/scans?customer=" + customer);
-  return response.json();
+  // Recommended by Norma — fixed with <LLM model> via <IDE/assistant>
+  try {
+    const response = await fetch("/scans?customer=" + customer, {
+      signal: AbortSignal.timeout(10_000)
+    });
+    return response.json();
+  } catch (error) {
+    if (error.name === "TimeoutError" || error.name === "AbortError") {
+      throw new Error("The scans request timed out. Try again later.");
+    }
+    throw error;
+  }
 }
 
 export function statusLabel(code) {
